@@ -1,32 +1,77 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+
+    <div id="wrapper"
+      :class="['d-flex', isSidebarOpen ? null : 'toggled']"
+      >
+
+      <!-- Sidebar -->
+      <sidebar />
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+
+        <!-- Navbar -->
+        <top-navbar @toggleSidebar="doToggleSidebar()" :isSidebarOpen="isSidebarOpen" />
+
+        <router-view/>
+      </div>
+      <!-- /#page-content-wrapper -->
+
     </div>
-    <router-view/>
+  <!-- /#wrapper -->
+
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Sidebar from '@/components/layout/Sidebar.vue';
+import TopNavbar from '@/components/layout/TopNavbar.vue';
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components: {
+    Sidebar,
+    'top-navbar': TopNavbar
+  },
+  data() {
+    return {
+      isSidebarOpen: true
+    }
+  },
+  methods: {
+    doToggleSidebar() {
+      this.isSidebarOpen = ! this.isSidebarOpen;
     }
   }
 }
+</script>
+
+<style lang="scss">
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+#wrapper {
+  overflow-x: hidden;
+
+  &.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+@media (min-width: 768px) {
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+
 </style>
