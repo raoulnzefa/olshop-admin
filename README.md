@@ -1,5 +1,9 @@
 # olshop-admin - Simple CRUD for Manage Product
 
+### PREVIEW
+![Preview Product List](https://raw.githubusercontent.com/axquired24/olshop-admin/master/preview/admin-preview-0.png)
+![Preview Product Update](https://raw.githubusercontent.com/axquired24/olshop-admin/master/preview/admin-preview-1.png)
+
 ## Project setup
 ```
 npm install
