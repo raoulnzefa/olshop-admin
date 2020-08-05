@@ -11,11 +11,6 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -38,11 +33,34 @@ Vue.use(VueRouter)
     component: function () {
       return import('../views/Setting.vue')
     }
-  }
+  },
+  {
+    path: '/product/add',
+    name: 'Product Add',
+    component: function () {
+      return import('../views/product/ProductAdd.vue')
+    }
+  },
+  {
+    path: '/product/:productId/detail',
+    name: 'Product Detail',
+    component: function () {
+      return import('../views/product/ProductDetail.vue')
+    }
+  },
+  {
+    path: '/product/:productId/update',
+    name: 'Product Update',
+    component: function () {
+      return import('../views/product/ProductUpdate.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes,
+  linkActiveClass: 'active'
 })
 
 export default router
