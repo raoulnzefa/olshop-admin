@@ -91,7 +91,15 @@ export default {
     },
     productId() {
       return this.$route.params.productId ? this.$route.params.productId : null;
-    }
+    },
+    products: {
+      get () {
+        return this.$store.state.product.items;
+      },
+      set (value) {
+        this.$store.commit('STORE_ITEMS', value);
+      }
+    },
   },
   methods: {
     toEditableData() {
@@ -133,6 +141,7 @@ export default {
 
       submitResponse.then(resp => {
         self.isSubmitting = false;
+        self.reFetchProducts();
         self.backToHome();
       }).catch(err => {
         self.isSubmitting = false;
@@ -141,7 +150,13 @@ export default {
     },
     resetForm() {
       this.productEditable = cleanForm;
-    }
+    },
+    reFetchProducts() {
+      const self = this;
+      Api.ProductList().then(resp => {
+        self.products = resp.data.data;
+      })
+    },
   },
   mounted() {
     this.toEditableData();

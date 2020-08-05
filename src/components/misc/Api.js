@@ -32,7 +32,6 @@ const Api = {
   ProductDelete: function(productId='id01') {
     return axios.delete(baseURL + '/products/' + productId);
   }
-  
 }
 
 export default Api;

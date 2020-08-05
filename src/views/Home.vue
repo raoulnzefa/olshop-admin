@@ -33,12 +33,11 @@ export default {
   name: 'Home',
   data() {
     return {
-      products: [],
       sortBy: 'id',
       sortDesc: false,
       fields: [
         { key: 'id', sortable: true },
-        { key: 'uuid', sortable: false },
+        // { key: 'uuid', sortable: false },
         { key: 'sku', sortable: false },
         { key: 'name', sortable: true },
         { key: 'price', sortable: true },
@@ -74,13 +73,27 @@ export default {
     remove(data) {
       const self = this;
       let confirmed = confirm("Remove this product? (" + data.item.name + ")");
-      Api.ProductDelete(data.item.uuid).then(resp => {
-        self.fetchProducts();
-      });
+      if(confirmed) {
+        Api.ProductDelete(data.item.uuid).then(resp => {
+          self.fetchProducts();
+        });
+      }
     }
   },
+  computed: {
+    products: {
+      get () {
+        return this.$store.state.product.items;
+      },
+      set (value) {
+        this.$store.commit('STORE_ITEMS', value);
+      }
+    },
+  },
   mounted() {
-    this.fetchProducts();
+    if (this.products.length < 1) {
+      this.fetchProducts();
+    }
   }
 
 }
