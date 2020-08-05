@@ -1,19 +1,21 @@
-# olshop-admin
+# olshop-admin - Simple CRUD for Manage Product
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### For Development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### For Production
 ```
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Notes
+```
+AssessmentID set on src/components/misc/Api.js
+```
